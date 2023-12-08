@@ -29,9 +29,13 @@
         "symfony/lts": "^4@dev",
         "symfony/monolog-bundle": "^3.1",
         "symfony/polyfill-apcu": "^1.0",
+        "symfony/security-csrf": "^4.0",
         "symfony/translation": "^4.0",
+        "symfony/twig-bundle": "^4.0",
         "symfony/validator": "^4.0",
-        "symfony/yaml": "^4.0"
+        "symfony/yaml": "^4.0",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^4.0",
