@@ -1,3 +1,12 @@
+app:
+    resource: "../src/AppBundle/Controller/"
+    type:     annotation
+
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+homepage:
+    path: /
+    defaults:
+      _controller: AppBundle\Controller\MainController::homepageAction
