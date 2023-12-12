@@ -1,5 +1,5 @@
 app:
-    resource: "../src/AppBundle/Controller/"
+    resource: "../src/Controller/"
     type:     annotation
 
 #index:
@@ -9,4 +9,4 @@ app:
 homepage:
     path: /
     defaults:
-      _controller: AppBundle\Controller\MainController::homepageAction
+      _controller: App\Controller\DefaultController::indexAction

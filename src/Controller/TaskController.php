@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use AppBundle\Entity\Task;
-use AppBundle\Form\TaskType;
+use App\Entity\Task;
+use App\Form\TaskType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
