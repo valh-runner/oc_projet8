@@ -6,11 +6,7 @@
         "psr-4": {
             "AppBundle\\": "src/AppBundle",
             "App\\": "src/"
-        },
-        "classmap": [
-            "app/AppKernel.php",
-            "app/AppCache.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
@@ -21,6 +17,7 @@
     "require": {
         "php": "^7.2.0",
         "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/doctrine-cache-bundle": "^1.4",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.5",
         "symfony/asset": "^4.0",
@@ -36,6 +33,7 @@
         "symfony/translation": "^4.0",
         "symfony/twig-bundle": "^4.0",
         "symfony/validator": "^4.0",
+        "symfony/web-server-bundle": "^4.0",
         "symfony/yaml": "^4.0",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
