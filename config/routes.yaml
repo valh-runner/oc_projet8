@@ -1,7 +1,9 @@
-app:
-    resource: "../src/Controller/"
-    type:     annotation
+###TODEL
+#app:
+#    resource: "../src/Controller/"
+#    type:     annotation
 
+###TODEL
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
