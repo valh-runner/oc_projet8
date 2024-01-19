@@ -17,7 +17,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "1.12",
-            "ref": "11962ad3f13015bd463235f5adffe8f70b848a42"
+            "ref": "ddaef874d696cf6db4591c446d011221c94194cb"
         },
         "files": [
             "config/packages/doctrine.yaml",
