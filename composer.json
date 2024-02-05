@@ -29,6 +29,7 @@
         "symfony/framework-bundle": "5.4.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/polyfill-apcu": "^1.0",
+        "symfony/runtime": "5.4.*",
         "symfony/security-bundle": "5.4.*",
         "symfony/security-csrf": "5.4.*",
         "symfony/translation": "5.4.*",
@@ -51,7 +52,8 @@
     },
     "config": {
         "allow-plugins": {
-            "symfony/flex": true
+            "symfony/flex": true,
+            "symfony/runtime": true
         },
         "preferred-install": {
             "*": "dist"
