@@ -2,13 +2,13 @@ security:
     encoders:
         App\Entity\User: bcrypt
 
-    enable_authenticator_manager: false
+    enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        doctrine:
+        app_user_provider:
             entity:
                 class: App\Entity\User
                 property: username
@@ -19,7 +19,8 @@ security:
             security: false
 
         main:
-            anonymous: ~
+            lazy: true
+            provider: app_user_provider
             pattern: ^/
             form_login:
                 login_path: login
@@ -27,8 +28,6 @@ security:
                 always_use_default_target_path:  true
                 default_target_path:  /
             logout: ~
-            #lazy: true
-            #provider: users_in_memory
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
