@@ -5,9 +5,10 @@ declare(strict_types=1);
 use Rector\Core\Configuration\Option;
 use Rector\Symfony\Set\SymfonySetList;
 //use Rector\Doctrine\Set\DoctrineSetList;
-use Rector\Set\ValueObject\LevelSetList;
+//use Rector\Set\ValueObject\LevelSetList;
 //use Rector\Symfony\Set\SensiolabsSetList;
 //use Rector\Php74\Rector\Property\TypedPropertyRector;
+use Rector\Symfony\Set\SymfonyLevelSetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -22,10 +23,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     );
 
     // Define what rule sets will be applied
-    $containerConfigurator->import(LevelSetList::UP_TO_PHP_80);
+    //$containerConfigurator->import(LevelSetList::UP_TO_PHP_80);
     //$containerConfigurator->import(DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES);
     //$containerConfigurator->import(SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES);
     //$containerConfigurator->import(SensiolabsSetList::FRAMEWORK_EXTRA_61);
+    $containerConfigurator->import(SymfonyLevelSetList::UP_TO_SYMFONY_60);
     $containerConfigurator->import(SymfonySetList::SYMFONY_CODE_QUALITY);
     $containerConfigurator->import(SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION);
 
