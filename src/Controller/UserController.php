@@ -4,35 +4,34 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
     #[Route(path: '/users', name: 'user_list')]
-    public function list(ManagerRegistry $doctrine): Response
+    public function list(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('user/list.html.twig', ['users' => $doctrine->getRepository(User::class)->findAll()]);
+        return $this->render('user/list.html.twig', ['users' => $entityManager->getRepository(User::class)->findAll()]);
     }
 
     #[Route(path: '/users/create', name: 'user_create')]
-    public function create(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine): Response
+    public function create(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $doctrine->getManager();
             $password = $userPasswordHasher->hashPassword($user, $user->getPassword());
 
             $user->setPassword($password);
 
-            $em->persist($user);
-            $em->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             $this->addFlash('success', "L'utilisateur a bien été ajouté.");
 
@@ -43,7 +42,7 @@ class UserController extends AbstractController
     }
 
     #[Route(path: '/users/{id}/edit', name: 'user_edit')]
-    public function edit(User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine): Response
+    public function edit(User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -51,7 +50,7 @@ class UserController extends AbstractController
             $password = $userPasswordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            $doctrine->getManager()->flush();
+            $entityManager->flush();
 
             $this->addFlash('success', "L'utilisateur a bien été modifié");
 

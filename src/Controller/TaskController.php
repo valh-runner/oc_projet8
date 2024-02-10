@@ -4,32 +4,30 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TaskController extends AbstractController
 {
     #[Route(path: '/tasks', name: 'task_list')]
-    public function list(ManagerRegistry $doctrine): Response
+    public function list(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('task/list.html.twig', ['tasks' => $doctrine->getRepository(Task::class)->findAll()]);
+        return $this->render('task/list.html.twig', ['tasks' => $entityManager->getRepository(Task::class)->findAll()]);
     }
 
     #[Route(path: '/tasks/create', name: 'task_create')]
-    public function create(Request $request, ManagerRegistry $doctrine): Response
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $doctrine->getManager();
-
-            $em->persist($task);
-            $em->flush();
+            $entityManager->persist($task);
+            $entityManager->flush();
 
             $this->addFlash('success', 'La tâche a été bien été ajoutée.');
 
@@ -40,12 +38,12 @@ class TaskController extends AbstractController
     }
 
     #[Route(path: '/tasks/{id}/edit', name: 'task_edit')]
-    public function edit(Task $task, Request $request, ManagerRegistry $doctrine): Response
+    public function edit(Task $task, Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $doctrine->getManager()->flush();
+            $entityManager->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
 
@@ -59,21 +57,20 @@ class TaskController extends AbstractController
     }
 
     #[Route(path: '/tasks/{id}/toggle', name: 'task_toggle')]
-    public function toggleTask(Task $task, ManagerRegistry $doctrine): RedirectResponse
+    public function toggleTask(Task $task, EntityManagerInterface $entityManager): RedirectResponse
     {
         $task->toggle(!$task->isDone());
-        $doctrine->getManager()->flush();
+        $entityManager->flush();
         $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
 
         return $this->redirectToRoute('task_list');
     }
 
     #[Route(path: '/tasks/{id}/delete', name: 'task_delete')]
-    public function deleteTask(Task $task, ManagerRegistry $doctrine): RedirectResponse
+    public function deleteTask(Task $task, EntityManagerInterface $entityManager): RedirectResponse
     {
-        $em = $doctrine->getManager();
-        $em->remove($task);
-        $em->flush();
+        $entityManager->remove($task);
+        $entityManager->flush();
         $this->addFlash('success', 'La tâche a bien été supprimée.');
 
         return $this->redirectToRoute('task_list');
