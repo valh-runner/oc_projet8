@@ -1,14 +1,12 @@
-###TODEL
-#app:
-#    resource: "../src/Controller/"
-#    type:     annotation
-
-###TODEL
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
 homepage:
     path: /
     defaults:
       _controller: App\Controller\DefaultController::index
+
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
