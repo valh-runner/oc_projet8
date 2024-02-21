@@ -35,4 +35,8 @@
 
     <extensions>
     </extensions>
+
+    <logging>
+        <testdoxText outputFile="php://stdout"/>
+    </logging>
 </phpunit>

@@ -16,7 +16,7 @@ class TaskTest extends TestCase
         self::assertSame($date, $task->getCreatedAt()->format('Y-m-d H:i'));
     }
 
-    //fare pareil pour getters et seeters en vérifiant que valeur bien settée
+    //fare pareil pour getters et setters en vérifiant que valeur bien settée
 
     // tester isDone initialisé à false ..
 
