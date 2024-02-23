@@ -52,4 +52,10 @@ class UserTest extends TestCase
         $user->setEmail('user@example.com');
         self::assertSame('user@example.com', $user->getEmail());
     }
+
+    public function testRolesReturned()
+    {
+        $user = new User();
+        self::assertSame(['ROLE_USER'], $user->getRoles());
+    }
 }
