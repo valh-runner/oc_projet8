@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class DefaultControllerTest extends WebTestCase
+class UserControllerTest extends WebTestCase
 {
     private ?KernelBrowser $client = null;
     private ?UrlGeneratorInterface  $urlGenerator = null;
@@ -24,12 +24,24 @@ class DefaultControllerTest extends WebTestCase
         $this->urlGenerator = null;
     }
 
-    public function testIndex()
+    public function testList()
     {
-        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('homepage'));
-        $this->client->followRedirect();
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_list'));
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        //$this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
+    }
+
+    public function testCreate()
+    {
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_create'));
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testEdit()
+    {
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_edit'));
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 }
