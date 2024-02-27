@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -14,22 +15,29 @@ class DefaultControllerTest extends WebTestCase
 
     public function setUp(): void
     {
+        self::ensureKernelShutdown();
         $this->client = static::createClient();
         $this->urlGenerator = $this->client->getContainer()->get('router.default');
     }
 
     public function tearDown(): void
     {
-        $this->client = null;
-        $this->urlGenerator = null;
+        unset($this->client);
+        unset($this->urlGenerator);
     }
 
-    public function testIndex()
+    public function testIndex(): void
     {
-        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('homepage'));
-        $this->client->followRedirect();
+        $userRepository = $this->client->getContainer()->get('doctrine.orm.entity_manager')->getRepository(User::class);
+        $testUser = $userRepository->findOneByEmail('jarvis@example.com'); // retrieve the test user
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        //$this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('homepage'));
+        $this->assertResponseRedirects();
+
+        $this->client->loginUser($testUser); // simulate the test user being logged in
+
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('homepage'));
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', "Bienvenue sur Todo List");
     }
 }
