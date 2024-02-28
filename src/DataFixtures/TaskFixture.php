@@ -24,12 +24,6 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
         $this->createTask('rédiger le rapport', 'ainsi que les annexes', $user2, $manager);
         $this->createTask('faire un cake salé', 'avec de la feta et des olives vertes', $user3, $manager);
 
-        /*$task = new Task();
-        $task->setTitle('construire une route');
-        $task->setContent('avec deux voies séparées');
-        $task->setOwner($user1);
-        $manager->persist($task);*/
-
         $manager->flush();
     }
 
