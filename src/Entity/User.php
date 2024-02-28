@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -31,14 +29,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(message: 'Vous devez saisir une adresse email.')]
     #[Assert\Email(message: "Le format de l'adresse n'est pas correcte.")]
     private ?string $email = null;
-
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Task::class)]
-    private Collection $tasks;
-
-    public function __construct()
-    {
-        $this->tasks = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -95,35 +85,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials(): void
     {
-    }
-
-    /**
-     * @return Collection<int, Task>
-     */
-    public function getTasks(): Collection
-    {
-        return $this->tasks;
-    }
-
-    public function addTask(Task $task): static
-    {
-        if (!$this->tasks->contains($task)) {
-            $this->tasks->add($task);
-            $task->setOwner($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTask(Task $task): static
-    {
-        if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
-            if ($task->getOwner() === $this) {
-                $task->setOwner(null);
-            }
-        }
-
-        return $this;
     }
 }
