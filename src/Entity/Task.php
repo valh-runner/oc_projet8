@@ -28,6 +28,10 @@ class Task
     #[ORM\Column()]
     private bool $isDone = false;
 
+    #[ORM\ManyToOne(inversedBy: 'tasks')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $owner = null;
+
     public function __construct()
     {
         $this->createdAt = new \Datetime();
@@ -76,5 +80,17 @@ class Task
     public function toggle($flag): void
     {
         $this->isDone = $flag;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): static
+    {
+        $this->owner = $owner;
+
+        return $this;
     }
 }
