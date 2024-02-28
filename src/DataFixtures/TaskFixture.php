@@ -3,12 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\Task;
-use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class TaskFixture extends Fixture implements DependentFixtureInterface
+class TaskFixture extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
@@ -25,22 +23,5 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
         $this->createTask('faire un cake salé', 'avec de la feta et des olives vertes', $user3, $manager);
 
         $manager->flush();
-    }
-
-    /**
-     * @return list<class-string<FixtureInterface>>
-     */
-    public function getDependencies(): array
-    {
-        return [UserFixture::class];
-    }
-
-    private function createTask(string $title, string $content, User $user, ObjectManager $manager): void
-    {
-        $task = new Task();
-        $task->setTitle($title);
-        $task->setContent($content);
-        $task->setOwner($user);
-        $manager->persist($task);
     }
 }
