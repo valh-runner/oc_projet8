@@ -18,7 +18,7 @@ class UserFixture extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $adminUser1 = $this->createUser('jarvis', '0Todoco*', 'jarvis@example.com', $manager);
+        $adminUser1 = $this->createUser('jarvis', '0Todoco*', 'jarvis@example.com', $manager, ['ROLE_ADMIN']);
         $user1 = $this->createUser('barry', '8Todoco+', 'barry@example.com', $manager);
         $user2 = $this->createUser('stephen', '5Todoco+', 'stephen@example.com', $manager);
         $user3 = $this->createUser('amy', '4Todoco+', 'amy@example.com', $manager);
@@ -31,11 +31,12 @@ class UserFixture extends Fixture
         $this->addReference('user-3', $user3);
     }
 
-    private function createUser(string $username, string $password, string $email, ObjectManager $manager): User
+    private function createUser(string $username, string $password, string $email, ObjectManager $manager, array $roles = []): User
     {
         $user = new User();
         $user->setUsername($username);
         $user->setEmail($email);
+        $user->setRoles($roles);
         $hashedPassword = $this->userPasswordHasherInterface->hashPassword($user, $password); // hash the password
         $user->setPassword($hashedPassword);
 
