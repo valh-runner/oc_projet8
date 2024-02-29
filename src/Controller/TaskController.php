@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Entity\User;
 use App\Form\TaskType;
 use App\Security\TaskVoter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +18,17 @@ class TaskController extends AbstractController
     #[Route(path: '/tasks', name: 'task_list')]
     public function list(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('task/list.html.twig', ['tasks' => $entityManager->getRepository(Task::class)->findAll()]);
+        $taskOwners = array();
+        $taskOwners[] = $this->getUser(); // add authentified user tasks
+        // if admin role, add anonym user tasks
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $anonymUser = $entityManager->getRepository(User::class)->findOneBy(['username' => 'anonym']);
+            $taskOwners[] = $anonymUser;
+        }
+
+        return $this->render('task/list.html.twig', ['tasks' => $entityManager->getRepository(Task::class)->findBy(
+            array('owner' => $taskOwners)
+        )]);
     }
 
     #[Route(path: '/tasks/create', name: 'task_create')]
