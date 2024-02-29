@@ -16,12 +16,16 @@ class UserController extends AbstractController
     #[Route(path: '/users', name: 'user_list')]
     public function list(EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         return $this->render('user/list.html.twig', ['users' => $entityManager->getRepository(User::class)->findAll()]);
     }
 
     #[Route(path: '/users/create', name: 'user_create')]
     public function create(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -44,6 +48,8 @@ class UserController extends AbstractController
     #[Route(path: '/users/{id}/edit', name: 'user_edit')]
     public function edit(User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

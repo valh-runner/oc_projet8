@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
+use App\Security\TaskVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,6 +42,8 @@ class TaskController extends AbstractController
     #[Route(path: '/tasks/{id}/edit', name: 'task_edit')]
     public function edit(Task $task, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted(TaskVoter::EDIT, $task);
+
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -70,6 +73,8 @@ class TaskController extends AbstractController
     #[Route(path: '/tasks/{id}/delete', name: 'task_delete')]
     public function deleteTask(Task $task, EntityManagerInterface $entityManager): RedirectResponse
     {
+        $this->denyAccessUnlessGranted(TaskVoter::DELETE, $task);
+
         $entityManager->remove($task);
         $entityManager->flush();
         $this->addFlash('success', 'La tâche a bien été supprimée.');

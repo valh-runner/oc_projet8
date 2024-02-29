@@ -17,11 +17,15 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
         $user1 = $this->getReference('user-1');
         $user2 = $this->getReference('user-2');
         $user3 = $this->getReference('user-3');
+        $user4 = $this->getReference('user-4');
 
         $this->createTask('administrer todoco', 'et éventuellement supprimer des tâches utilisateur', $adminUser1, $manager);
-        $this->createTask('construire un abri de jardin', 'en bois exotique', $user1, $manager);
-        $this->createTask('rédiger le rapport', 'ainsi que les annexes', $user2, $manager);
-        $this->createTask('faire un cake salé', 'avec de la feta et des olives vertes', $user3, $manager);
+        $this->createTask('acheter un vélo', 'suspendu avec freins à disques', $user1, $manager);
+        $this->createTask('rappeler le voisin', 'pour lui faire un retour', $user1, $manager);
+        $this->createTask('faire un road trip', 'pour découvrir l\'Europe', $user1, $manager);
+        $this->createTask('construire un abri de jardin', 'en bois exotique', $user2, $manager);
+        $this->createTask('rédiger le rapport', 'ainsi que les annexes', $user3, $manager);
+        $this->createTask('faire un cake salé', 'avec de la feta et des olives vertes', $user4, $manager);
 
         $manager->flush();
     }
