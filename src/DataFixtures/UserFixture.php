@@ -19,9 +19,10 @@ class UserFixture extends Fixture
     public function load(ObjectManager $manager): void
     {
         $adminUser1 = $this->createUser('jarvis', '0Todoco*', 'jarvis@example.com', $manager, ['ROLE_ADMIN']);
-        $user1 = $this->createUser('barry', '8Todoco+', 'barry@example.com', $manager);
-        $user2 = $this->createUser('stephen', '5Todoco+', 'stephen@example.com', $manager);
-        $user3 = $this->createUser('amy', '4Todoco+', 'amy@example.com', $manager);
+        $user1 = $this->createUser('anonym', '4Todoco+', 'anonym@example.com', $manager);
+        $user2 = $this->createUser('barry', '8Todoco+', 'barry@example.com', $manager);
+        $user3 = $this->createUser('stephen', '5Todoco+', 'stephen@example.com', $manager);
+        $user4 = $this->createUser('amy', '4Todoco+', 'amy@example.com', $manager);
         $manager->flush();
 
         // share users objects with other fixture
@@ -29,6 +30,7 @@ class UserFixture extends Fixture
         $this->addReference('user-1', $user1);
         $this->addReference('user-2', $user2);
         $this->addReference('user-3', $user3);
+        $this->addReference('user-4', $user4);
     }
 
     private function createUser(string $username, string $password, string $email, ObjectManager $manager, array $roles = []): User
