@@ -12,7 +12,7 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        // retrieve users objects from other fixture
+        // Retrieve users objects from other fixture
         $adminUser1 = $this->getReference('admin-user-1');
         $user1 = $this->getReference('user-1');
         $user2 = $this->getReference('user-2');

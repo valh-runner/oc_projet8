@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class TaskVoter extends Voter
 {
-    // these strings are just invented: you can use anything
+    // These strings are just invented: you can use anything
     const EDIT = 'edit';
     const DELETE = 'delete';
 
@@ -20,12 +20,12 @@ class TaskVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        // if the attribute isn't one we support, return false
+        // If the attribute isn't one we support, return false
         if (!in_array($attribute, [self::EDIT, self::DELETE])) {
             return false;
         }
 
-        // only vote on `Post` objects
+        // Only vote on `Post` objects
         if (!$subject instanceof Task) {
             return false;
         }
@@ -38,11 +38,11 @@ class TaskVoter extends Voter
         $user = $token->getUser();
 
         if (!$user instanceof User) {
-            // the user must be logged in; if not, deny access
+            // The user must be logged in; if not, deny access
             return false;
         }
 
-        // you know $subject is a Task object, thanks to `supports()`
+        // You know $subject is a Task object, thanks to `supports()`
         /** @var Task $task */
         $task = $subject;
 
@@ -55,7 +55,7 @@ class TaskVoter extends Voter
 
     private function canEdit(Task $task, User $user): bool
     {
-        if ($this->canDelete($task, $user)) { // if they can edit, they can delete
+        if ($this->canDelete($task, $user)) { // If they can edit, they can delete
             return true;
         }
         return false;
@@ -63,11 +63,11 @@ class TaskVoter extends Voter
 
     private function canDelete(Task $task, User $user): bool
     {
-        // if user if the owner
+        // If user if the owner
         if ($user === $task->getOwner()) {
             return true;
         }
-        // if task owned by anonym user and authenticated user is admin
+        // If task owned by anonym user and authenticated user is admin
         elseif ($task->getOwner()->getUsername() == 'anonym' && $this->security->isGranted('ROLE_ADMIN')) {
             return true;
         }

@@ -13,7 +13,7 @@ class TaskType extends AbstractType
         $builder
             ->add('title')
             ->add('content', TextareaType::class)
-            //->add('owner') // must be the user authenticated
+            // Authenticated user is added to task as owner after validation
         ;
     }
 }

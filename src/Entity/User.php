@@ -91,7 +91,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ROLE_USER'; // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER'; // Guarantee every user at least has ROLE_USER
 
         return array_unique($roles);
     }
@@ -101,6 +101,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles = $roles;
 
         return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
     }
 
     /**
@@ -131,7 +142,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeTask(Task $task): static
     {
         if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
+            // Set the owning side to null (unless already changed)
             if ($task->getOwner() === $this) {
                 $task->setOwner(null);
             }

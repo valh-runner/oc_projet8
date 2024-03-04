@@ -19,8 +19,8 @@ class TaskController extends AbstractController
     public function list(EntityManagerInterface $entityManager): Response
     {
         $taskOwners = array();
-        $taskOwners[] = $this->getUser(); // add authentified user tasks
-        // if admin role, add anonym user tasks
+        $taskOwners[] = $this->getUser(); // Add authentified user tasks
+        // If admin role, add anonym user tasks
         if ($this->isGranted('ROLE_ADMIN')) {
             $anonymUser = $entityManager->getRepository(User::class)->findOneBy(['username' => 'anonym']);
             $taskOwners[] = $anonymUser;

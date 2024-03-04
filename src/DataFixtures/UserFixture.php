@@ -39,7 +39,7 @@ class UserFixture extends Fixture
         $user->setUsername($username);
         $user->setEmail($email);
         $user->setRoles($roles);
-        $hashedPassword = $this->userPasswordHasherInterface->hashPassword($user, $password); // hash the password
+        $hashedPassword = $this->userPasswordHasherInterface->hashPassword($user, $password); // Hash the password
         $user->setPassword($hashedPassword);
 
         $manager->persist($user);
