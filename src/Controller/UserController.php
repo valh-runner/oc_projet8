@@ -17,7 +17,7 @@ class UserController extends AbstractController
     /**
      * User list
      *
-     * @param EntityManagerInterface $entityManager
+     * @param EntityManagerInterface $entityManager Entity manager
      * @return Response
      */
     #[Route(path: '/users', name: 'user_list')]
@@ -31,8 +31,8 @@ class UserController extends AbstractController
     /**
      * User create
      *
-     * @param Request $request
-     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param Request $request Request
+     * @param UserPasswordHasherInterface $userPasswordHasher Password hasher tool
      * @return Response
      */
     #[Route(path: '/users/create', name: 'user_create')]
@@ -62,10 +62,10 @@ class UserController extends AbstractController
     /**
      * User edit
      *
-     * @param User $user
-     * @param Request $request
-     * @param UserPasswordHasherInterface $userPasswordHasher
-     * @param EntityManagerInterface $entityManager
+     * @param User $user User
+     * @param Request $request Request
+     * @param UserPasswordHasherInterface $userPasswordHasher Password hasher tool
+     * @param EntityManagerInterface $entityManager Entity manager
      * @return Response
      */
     #[Route(path: '/users/{id}/edit', name: 'user_edit')]

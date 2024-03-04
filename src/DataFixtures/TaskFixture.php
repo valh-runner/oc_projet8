@@ -14,7 +14,7 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
     /**
      * Fixture main logic
      *
-     * @param ObjectManager $manager
+     * @param ObjectManager $manager Manager
      * @return void
      */
     public function load(ObjectManager $manager): void
@@ -50,10 +50,10 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
     /**
      * Task creation logic
      *
-     * @param string $title
-     * @param string $content
-     * @param User $user
-     * @param ObjectManager $manager
+     * @param string $title Title
+     * @param string $content Content
+     * @param User $user User
+     * @param ObjectManager $manager Manager
      * @return void
      */
     private function createTask(string $title, string $content, User $user, ObjectManager $manager): void

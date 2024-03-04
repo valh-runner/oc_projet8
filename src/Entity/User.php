@@ -62,36 +62,74 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->tasks = new ArrayCollection();
     }
 
+    /**
+     * Id getter
+     * 
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Username getter
+     *
+     * @return string|null
+     */
     public function getUsername(): ?string
     {
         return $this->username;
     }
 
+    /**
+     * Username setter
+     *
+     * @param string $username
+     * @return void
+     */
     public function setUsername($username): void
     {
         $this->username = $username;
     }
 
+    /**
+     * Password getter
+     *
+     * @return string|null
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    /**
+     * Password setter
+     * 
+     * @param string $password
+     * @return void
+     */
     public function setPassword($password): void
     {
         $this->password = $password;
     }
 
+    /**
+     * Email getter
+     *
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * Email setter
+     *
+     * @param string $email
+     * @return void
+     */
     public function setEmail($email): void
     {
         $this->email = $email;
@@ -101,12 +139,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * The public representation of the user (e.g. a username, an email address, etc.).
      *
      * @see UserInterface
+     * @return string
      */
     public function getUserIdentifier(): string
     {
         return (string) $this->username;
     }
 
+    /**
+     * Roles getter
+     *
+     * @return array
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -115,6 +159,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * Roles setter
+     *
+     * @param array $roles
+     * @return self
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -127,20 +177,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *
      * @see UserInterface
+     * @return string|null
      */
     public function getSalt(): ?string
     {
         return null;
     }
 
+
     /**
+     * Credentials erase command
+     *
      * @see UserInterface
+     * @return void
      */
     public function eraseCredentials(): void
     {
     }
 
+
     /**
+     * Tasks getter
+     *
      * @return Collection<int, Task>
      */
     public function getTasks(): Collection
@@ -148,6 +206,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->tasks;
     }
 
+    /**
+     * Task add
+     *
+     * @param Task $task
+     * @return static
+     */
     public function addTask(Task $task): static
     {
         if (!$this->tasks->contains($task)) {
@@ -158,6 +222,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * Task remove
+     *
+     * @param Task $task
+     * @return static
+     */
     public function removeTask(Task $task): static
     {
         if ($this->tasks->removeElement($task)) {

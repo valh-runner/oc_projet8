@@ -26,7 +26,7 @@ class UserFixture extends Fixture
     /**
      * Fixture main logic
      *
-     * @param ObjectManager $manager
+     * @param ObjectManager $manager Manager
      * @return void
      */
     public function load(ObjectManager $manager): void
@@ -49,11 +49,11 @@ class UserFixture extends Fixture
     /**
      * User creation logic
      *
-     * @param string $username
-     * @param string $password
-     * @param string $email
-     * @param ObjectManager $manager
-     * @param array $roles
+     * @param string $username Username
+     * @param string $password Password
+     * @param string $email Email
+     * @param ObjectManager $manager Manager
+     * @param array $roles Roles
      * @return void
      */
     private function createUser(string $username, string $password, string $email, ObjectManager $manager, array $roles = []): User
