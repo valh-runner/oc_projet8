@@ -81,7 +81,7 @@ class TaskControllerTest extends WebTestCase
      */
     public function testEdit(): void
     {
-        $testTask = $this->taskRepository->findAll(['limit' => 1])[0]; // retrieve a task.
+        $testTask = $this->taskRepository->findAll(['limit' => 1])[0]; // Retrieve a task.
 
         $this->client->loginUser($this->testUser); // Simulate the test user being logged in.
         $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('task_edit', ['id' => $testTask->getId()]));

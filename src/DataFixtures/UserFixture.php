@@ -38,7 +38,7 @@ class UserFixture extends Fixture
         $user4 = $this->createUser('amy', '4Todoco+', 'amy@example.com', $manager);
         $manager->flush();
 
-        // share users objects with other fixture.
+        // Share users objects with other fixture.
         $this->addReference('admin-user-1', $adminUser1);
         $this->addReference('user-1', $user1);
         $this->addReference('user-2', $user2);

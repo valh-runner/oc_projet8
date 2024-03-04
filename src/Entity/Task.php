@@ -39,7 +39,7 @@ class Task
     private ?string $content = null;
 
     /**
-     * @var bool $isDone Task done state
+     * @var boolean $isDone Task done state
      */
     #[ORM\Column()]
     private bool $isDone = false;

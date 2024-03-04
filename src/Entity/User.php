@@ -64,7 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Id getter
-     * 
+     *
      * @return int|null
      */
     public function getId(): ?int
