@@ -12,6 +12,7 @@ class DefaultControllerTest extends WebTestCase
 {
 
     private ?KernelBrowser $client = null;
+
     private ?UrlGeneratorInterface  $urlGenerator = null;
 
     public function setUp(): void

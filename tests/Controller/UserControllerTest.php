@@ -14,8 +14,11 @@ class UserControllerTest extends WebTestCase
 {
 
     private ?KernelBrowser $client = null;
+
     private ?UrlGeneratorInterface  $urlGenerator = null;
+
     private ?EntityRepository $userRepository = null;
+
     private ?User $testUser = null;
 
     public function setUp(): void

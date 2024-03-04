@@ -14,7 +14,9 @@ class SecurityControllerTest extends WebTestCase
 {
 
     private ?KernelBrowser $client = null;
+
     private ?UrlGeneratorInterface  $urlGenerator = null;
+
     private ?EntityRepository $userRepository = null;
 
     public function setUp(): void
