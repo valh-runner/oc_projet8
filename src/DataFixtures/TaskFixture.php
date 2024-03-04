@@ -11,6 +11,11 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 class TaskFixture extends Fixture implements DependentFixtureInterface
 {
 
+    /**
+     * Fixture main logic
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         // Retrieve users objects from other fixture.
@@ -32,6 +37,8 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
     }
 
     /**
+     * Fixture dependencies getter
+     * 
      * @return list<class-string<FixtureInterface>>
      */
     public function getDependencies(): array
@@ -39,6 +46,11 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
         return [UserFixture::class];
     }
 
+    /**
+     * Task creation logic
+     *
+     * @return void
+     */
     private function createTask(string $title, string $content, User $user, ObjectManager $manager): void
     {
         $task = new Task();

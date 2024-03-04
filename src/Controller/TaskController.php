@@ -16,6 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TaskController extends AbstractController
 {
 
+    /**
+     * Task list
+     *
+     * @return Response
+     */
     #[Route(path: '/tasks', name: 'task_list')]
     public function list(EntityManagerInterface $entityManager): Response
     {
@@ -32,6 +37,11 @@ class TaskController extends AbstractController
         )]);
     }
 
+    /**
+     * Task create
+     *
+     * @return Response
+     */
     #[Route(path: '/tasks/create', name: 'task_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -51,6 +61,11 @@ class TaskController extends AbstractController
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
+    /**
+     * Task edit
+     *
+     * @return Response
+     */
     #[Route(path: '/tasks/{id}/edit', name: 'task_edit')]
     public function edit(Task $task, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -72,6 +87,11 @@ class TaskController extends AbstractController
         ]);
     }
 
+    /**
+     * Task toggle
+     *
+     * @return RedirectResponse
+     */
     #[Route(path: '/tasks/{id}/toggle', name: 'task_toggle')]
     public function toggleTask(Task $task, EntityManagerInterface $entityManager): RedirectResponse
     {
@@ -82,6 +102,11 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 
+    /**
+     * Task delete
+     *
+     * @return RedirectResponse
+     */
     #[Route(path: '/tasks/{id}/delete', name: 'task_delete')]
     public function deleteTask(Task $task, EntityManagerInterface $entityManager): RedirectResponse
     {

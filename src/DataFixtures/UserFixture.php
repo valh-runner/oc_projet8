@@ -12,11 +12,21 @@ class UserFixture extends Fixture
 
     private UserPasswordHasherInterface $userPasswordHasherInterface;
 
+    /**
+     * Constructor
+     * 
+     * @return list<class-string<FixtureInterface>>
+     */
     public function __construct(UserPasswordHasherInterface $userPasswordHasherInterface)
     {
         $this->userPasswordHasherInterface = $userPasswordHasherInterface;
     }
 
+    /**
+     * Fixture main logic
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         $adminUser1 = $this->createUser('jarvis', '0Todoco*', 'jarvis@example.com', $manager, ['ROLE_ADMIN']);
@@ -34,6 +44,11 @@ class UserFixture extends Fixture
         $this->addReference('user-4', $user4);
     }
 
+    /**
+     * User creation logic
+     *
+     * @return void
+     */
     private function createUser(string $username, string $password, string $email, ObjectManager $manager, array $roles = []): User
     {
         $user = new User();
