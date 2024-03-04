@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class TaskVoter extends Voter
 {
+
     // These strings are just invented: you can use anything.
     const EDIT = 'edit';
     const DELETE = 'delete';

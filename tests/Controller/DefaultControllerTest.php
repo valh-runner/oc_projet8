@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DefaultControllerTest extends WebTestCase
 {
+
     private ?KernelBrowser $client = null;
     private ?UrlGeneratorInterface  $urlGenerator = null;
 

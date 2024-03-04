@@ -13,6 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
+
     #[Route(path: '/users', name: 'user_list')]
     public function list(EntityManagerInterface $entityManager): Response
     {

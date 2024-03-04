@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UserControllerTest extends WebTestCase
 {
+
     private ?KernelBrowser $client = null;
     private ?UrlGeneratorInterface  $urlGenerator = null;
     private ?EntityRepository $userRepository = null;

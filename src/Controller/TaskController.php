@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TaskController extends AbstractController
 {
+
     #[Route(path: '/tasks', name: 'task_list')]
     public function list(EntityManagerInterface $entityManager): Response
     {

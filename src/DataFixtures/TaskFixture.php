@@ -10,6 +10,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class TaskFixture extends Fixture implements DependentFixtureInterface
 {
+
     public function load(ObjectManager $manager): void
     {
         // Retrieve users objects from other fixture.

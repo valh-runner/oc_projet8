@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table]
 class Task
 {
+
     #[ORM\Column()]
     #[ORM\Id]
     #[ORM\GeneratedValue]
