@@ -35,6 +35,11 @@ class UserControllerTest extends WebTestCase
         unset($this->client, $this->urlGenerator, $this->urlGenerator, $this->testUser);
     }
 
+    /**
+     * User list test
+     *
+     * @return void
+     */
     public function testList(): void
     {
         $this->client->loginUser($this->testUser); // Simulate the test user being logged in.
@@ -45,6 +50,11 @@ class UserControllerTest extends WebTestCase
         $this->assertAnySelectorTextContains('th', "Adresse d'utilisateur");
     }
 
+    /**
+     * User create test
+     *
+     * @return void
+     */
     public function testCreate(): void
     {
         $this->client->loginUser($this->testUser); // Simulate the test user being logged in.
@@ -64,6 +74,11 @@ class UserControllerTest extends WebTestCase
         $this->assertSelectorTextContains('div.alert.alert-success', "Superbe ! L'utilisateur a bien été ajouté");
     }
 
+    /**
+     * User edit test
+     *
+     * @return void
+     */
     public function testEdit(): void
     {
         $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_edit', ['id' => $this->testUser->getId()]));

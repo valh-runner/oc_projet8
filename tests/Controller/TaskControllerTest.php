@@ -40,6 +40,11 @@ class TaskControllerTest extends WebTestCase
         unset($this->taskRepository, $this->userRepository, $this->testUser);
     }
 
+    /**
+     * Task list test
+     *
+     * @return void
+     */
     public function testList(): void
     {
         $this->client->loginUser($this->testUser); // Simulate the test user being logged in.
@@ -48,6 +53,11 @@ class TaskControllerTest extends WebTestCase
         $this->assertAnySelectorTextContains('a', 'Créer une tâche');
     }
 
+    /**
+     * Task create test
+     *
+     * @return void
+     */
     public function testCreate(): void
     {
         $this->client->loginUser($this->testUser); // Simulate the test user being logged in.
@@ -64,6 +74,11 @@ class TaskControllerTest extends WebTestCase
         $this->assertSelectorTextContains('div.alert.alert-success', 'Superbe ! La tâche a été bien été ajoutée.');
     }
 
+    /**
+     * Task edit test
+     *
+     * @return void
+     */
     public function testEdit(): void
     {
         $testTask = $this->taskRepository->findAll(['limit' => 1])[0]; // retrieve a task.
@@ -85,6 +100,11 @@ class TaskControllerTest extends WebTestCase
         $this->assertSame('doté de trois voûtes', $task2->getContent());
     }
 
+    /**
+     * Task toggle test
+     *
+     * @return void
+     */
     public function testToggleTask(): void
     {
         $testTask = $this->taskRepository->findAll(['limit' => 1])[0]; // Retrieve a task.
@@ -96,6 +116,11 @@ class TaskControllerTest extends WebTestCase
         $this->assertSelectorTextContains('div.alert.alert-success', "a bien été marquée comme faite");
     }
 
+    /**
+     * Task delete test
+     *
+     * @return void
+     */
     public function testDeleteTask(): void
     {
         $testTask = $this->taskRepository->findAll(['limit' => 1])[0]; // Retrieve a task.

@@ -28,6 +28,11 @@ class DefaultControllerTest extends WebTestCase
         unset($this->urlGenerator);
     }
 
+    /**
+     * Index test
+     *
+     * @return void
+     */
     public function testIndex(): void
     {
         $userRepository = $this->client->getContainer()->get('doctrine.orm.entity_manager')->getRepository(User::class);

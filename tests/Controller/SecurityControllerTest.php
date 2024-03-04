@@ -34,6 +34,11 @@ class SecurityControllerTest extends WebTestCase
         unset($this->userRepository);
     }
 
+    /**
+     * Login test
+     *
+     * @return void
+     */
     public function testLogin(): void
     {
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('login'));
@@ -41,12 +46,22 @@ class SecurityControllerTest extends WebTestCase
         $this->assertSelectorTextContains('button', 'Se connecter');
     }
 
+    /**
+     * Login check test
+     *
+     * @return void
+     */
     public function testLoginCheck(): void
     {
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('login_check'));
         $this->assertResponseStatusCodeSame(Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
+    /**
+     * Logout test
+     *
+     * @return void
+     */
     public function testLogout(): void
     {
         $testUser = $this->userRepository->findOneByEmail('jarvis@example.com'); // Retrieve the test user.

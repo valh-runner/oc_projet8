@@ -15,6 +15,7 @@ class UserFixture extends Fixture
     /**
      * Constructor
      * 
+     * @param UserPasswordHasherInterface $userPasswordHasherInterface
      * @return list<class-string<FixtureInterface>>
      */
     public function __construct(UserPasswordHasherInterface $userPasswordHasherInterface)
@@ -25,6 +26,7 @@ class UserFixture extends Fixture
     /**
      * Fixture main logic
      *
+     * @param ObjectManager $manager
      * @return void
      */
     public function load(ObjectManager $manager): void
@@ -47,6 +49,11 @@ class UserFixture extends Fixture
     /**
      * User creation logic
      *
+     * @param string $username
+     * @param string $password
+     * @param string $email
+     * @param ObjectManager $manager
+     * @param array $roles
      * @return void
      */
     private function createUser(string $username, string $password, string $email, ObjectManager $manager, array $roles = []): User

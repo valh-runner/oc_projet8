@@ -19,6 +19,7 @@ class TaskController extends AbstractController
     /**
      * Task list
      *
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
     #[Route(path: '/tasks', name: 'task_list')]
@@ -40,6 +41,8 @@ class TaskController extends AbstractController
     /**
      * Task create
      *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
     #[Route(path: '/tasks/create', name: 'task_create')]
@@ -64,6 +67,9 @@ class TaskController extends AbstractController
     /**
      * Task edit
      *
+     * @param Task $task
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
     #[Route(path: '/tasks/{id}/edit', name: 'task_edit')]
@@ -90,6 +96,8 @@ class TaskController extends AbstractController
     /**
      * Task toggle
      *
+     * @param Task $task
+     * @param EntityManagerInterface $entityManager
      * @return RedirectResponse
      */
     #[Route(path: '/tasks/{id}/toggle', name: 'task_toggle')]
@@ -105,6 +113,8 @@ class TaskController extends AbstractController
     /**
      * Task delete
      *
+     * @param Task $task
+     * @param EntityManagerInterface $entityManager
      * @return RedirectResponse
      */
     #[Route(path: '/tasks/{id}/delete', name: 'task_delete')]
