@@ -29,12 +29,12 @@ class DefaultControllerTest extends WebTestCase
     public function testIndex(): void
     {
         $userRepository = $this->client->getContainer()->get('doctrine.orm.entity_manager')->getRepository(User::class);
-        $testUser = $userRepository->findOneByEmail('jarvis@example.com'); // Retrieve the test user
+        $testUser = $userRepository->findOneByEmail('jarvis@example.com'); // Retrieve the test user.
 
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('homepage'));
         $this->assertResponseRedirects();
 
-        $this->client->loginUser($testUser); // Simulate the test user being logged in
+        $this->client->loginUser($testUser); // Simulate the test user being logged in.
 
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('homepage'));
         $this->assertResponseIsSuccessful();

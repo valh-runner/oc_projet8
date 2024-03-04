@@ -25,7 +25,7 @@ class UserFixture extends Fixture
         $user4 = $this->createUser('amy', '4Todoco+', 'amy@example.com', $manager);
         $manager->flush();
 
-        // share users objects with other fixture
+        // share users objects with other fixture.
         $this->addReference('admin-user-1', $adminUser1);
         $this->addReference('user-1', $user1);
         $this->addReference('user-2', $user2);
@@ -39,7 +39,7 @@ class UserFixture extends Fixture
         $user->setUsername($username);
         $user->setEmail($email);
         $user->setRoles($roles);
-        $hashedPassword = $this->userPasswordHasherInterface->hashPassword($user, $password); // Hash the password
+        $hashedPassword = $this->userPasswordHasherInterface->hashPassword($user, $password); // Hash the password.
         $user->setPassword($hashedPassword);
 
         $manager->persist($user);

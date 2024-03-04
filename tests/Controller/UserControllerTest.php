@@ -23,7 +23,7 @@ class UserControllerTest extends WebTestCase
         $this->client = static::createClient();
         $this->urlGenerator = $this->client->getContainer()->get('router.default');
         $this->userRepository = $this->client->getContainer()->get('doctrine.orm.entity_manager')->getRepository(User::class);
-        $this->testUser = $this->userRepository->findOneByEmail('jarvis@example.com'); // Retrieve the test user
+        $this->testUser = $this->userRepository->findOneByEmail('jarvis@example.com'); // Retrieve the test user.
     }
 
     public function tearDown(): void
@@ -33,7 +33,7 @@ class UserControllerTest extends WebTestCase
 
     public function testList(): void
     {
-        $this->client->loginUser($this->testUser); // Simulate the test user being logged in
+        $this->client->loginUser($this->testUser); // Simulate the test user being logged in.
 
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_list'));
         $this->assertResponseIsSuccessful();
@@ -43,7 +43,7 @@ class UserControllerTest extends WebTestCase
 
     public function testCreate(): void
     {
-        $this->client->loginUser($this->testUser); // Simulate the test user being logged in
+        $this->client->loginUser($this->testUser); // Simulate the test user being logged in.
 
         $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_create'));
 
@@ -76,7 +76,7 @@ class UserControllerTest extends WebTestCase
         $this->assertSelectorTextContains('div.alert.alert-success', "Superbe ! L'utilisateur a bien été modifié");
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
-        $editedUser = $this->userRepository->findOneByEmail('vision@example.com'); // Retrieve the test user
+        $editedUser = $this->userRepository->findOneByEmail('vision@example.com'); // Retrieve the test user.
         $this->assertSame('vision', $editedUser->getUsername());
         $this->assertSame('vision@example.com', $editedUser->getEmail());
     }

@@ -91,7 +91,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ROLE_USER'; // Guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER'; // Guarantee every user at least has ROLE_USER.
 
         return array_unique($roles);
     }
@@ -142,7 +142,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeTask(Task $task): static
     {
         if ($this->tasks->removeElement($task)) {
-            // Set the owning side to null (unless already changed)
+            // Set the owning side to null (unless already changed).
             if ($task->getOwner() === $this) {
                 $task->setOwner(null);
             }
