@@ -10,7 +10,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DefaultControllerTest extends WebTestCase
 {
+
     private ?KernelBrowser $client = null;
+
     private ?UrlGeneratorInterface  $urlGenerator = null;
 
     public function setUp(): void
@@ -26,15 +28,20 @@ class DefaultControllerTest extends WebTestCase
         unset($this->urlGenerator);
     }
 
+    /**
+     * Index test
+     *
+     * @return void
+     */
     public function testIndex(): void
     {
         $userRepository = $this->client->getContainer()->get('doctrine.orm.entity_manager')->getRepository(User::class);
-        $testUser = $userRepository->findOneByEmail('jarvis@example.com'); // retrieve the test user
+        $testUser = $userRepository->findOneByEmail('jarvis@example.com'); // Retrieve the test user.
 
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('homepage'));
         $this->assertResponseRedirects();
 
-        $this->client->loginUser($testUser); // simulate the test user being logged in
+        $this->client->loginUser($testUser); // Simulate the test user being logged in.
 
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('homepage'));
         $this->assertResponseIsSuccessful();

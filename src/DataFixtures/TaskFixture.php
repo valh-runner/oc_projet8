@@ -10,9 +10,16 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class TaskFixture extends Fixture implements DependentFixtureInterface
 {
+
+    /**
+     * Fixture main logic
+     *
+     * @param ObjectManager $manager Manager
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
-        // retrieve users objects from other fixture
+        // Retrieve users objects from other fixture.
         $adminUser1 = $this->getReference('admin-user-1');
         $user1 = $this->getReference('user-1');
         $user2 = $this->getReference('user-2');
@@ -31,6 +38,8 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
     }
 
     /**
+     * Fixture dependencies getter
+     *
      * @return list<class-string<FixtureInterface>>
      */
     public function getDependencies(): array
@@ -38,6 +47,15 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
         return [UserFixture::class];
     }
 
+    /**
+     * Task creation logic
+     *
+     * @param string $title Title
+     * @param string $content Content
+     * @param User $user User
+     * @param ObjectManager $manager Manager
+     * @return void
+     */
     private function createTask(string $title, string $content, User $user, ObjectManager $manager): void
     {
         $task = new Task();

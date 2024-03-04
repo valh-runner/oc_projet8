@@ -15,12 +15,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TaskController extends AbstractController
 {
+
+    /**
+     * Task list
+     *
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route(path: '/tasks', name: 'task_list')]
     public function list(EntityManagerInterface $entityManager): Response
     {
         $taskOwners = array();
-        $taskOwners[] = $this->getUser(); // add authentified user tasks
-        // if admin role, add anonym user tasks
+        $taskOwners[] = $this->getUser(); // Add authentified user tasks.
+        // If admin role, add anonym user tasks.
         if ($this->isGranted('ROLE_ADMIN')) {
             $anonymUser = $entityManager->getRepository(User::class)->findOneBy(['username' => 'anonym']);
             $taskOwners[] = $anonymUser;
@@ -31,6 +38,13 @@ class TaskController extends AbstractController
         )]);
     }
 
+    /**
+     * Task create
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route(path: '/tasks/create', name: 'task_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -50,6 +64,14 @@ class TaskController extends AbstractController
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
+    /**
+     * Task edit
+     *
+     * @param Task $task
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route(path: '/tasks/{id}/edit', name: 'task_edit')]
     public function edit(Task $task, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -71,6 +93,13 @@ class TaskController extends AbstractController
         ]);
     }
 
+    /**
+     * Task toggle
+     *
+     * @param Task $task Task
+     * @param EntityManagerInterface $entityManager Entity manager
+     * @return RedirectResponse
+     */
     #[Route(path: '/tasks/{id}/toggle', name: 'task_toggle')]
     public function toggleTask(Task $task, EntityManagerInterface $entityManager): RedirectResponse
     {
@@ -81,6 +110,13 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 
+    /**
+     * Task delete
+     *
+     * @param Task $task Task
+     * @param EntityManagerInterface $entityManager Entity manager
+     * @return RedirectResponse
+     */
     #[Route(path: '/tasks/{id}/delete', name: 'task_delete')]
     public function deleteTask(Task $task, EntityManagerInterface $entityManager): RedirectResponse
     {

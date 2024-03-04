@@ -8,12 +8,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class TaskType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('title')
             ->add('content', TextareaType::class)
-            //->add('owner') // must be the user authenticated
+            // Authenticated user is added to task as owner after validation.
         ;
     }
 }

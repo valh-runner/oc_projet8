@@ -12,9 +12,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UserControllerTest extends WebTestCase
 {
+
     private ?KernelBrowser $client = null;
+
     private ?UrlGeneratorInterface  $urlGenerator = null;
+
     private ?EntityRepository $userRepository = null;
+
     private ?User $testUser = null;
 
     public function setUp(): void
@@ -23,7 +27,7 @@ class UserControllerTest extends WebTestCase
         $this->client = static::createClient();
         $this->urlGenerator = $this->client->getContainer()->get('router.default');
         $this->userRepository = $this->client->getContainer()->get('doctrine.orm.entity_manager')->getRepository(User::class);
-        $this->testUser = $this->userRepository->findOneByEmail('jarvis@example.com'); // retrieve the test user
+        $this->testUser = $this->userRepository->findOneByEmail('jarvis@example.com'); // Retrieve the test user.
     }
 
     public function tearDown(): void
@@ -31,9 +35,14 @@ class UserControllerTest extends WebTestCase
         unset($this->client, $this->urlGenerator, $this->urlGenerator, $this->testUser);
     }
 
+    /**
+     * User list test
+     *
+     * @return void
+     */
     public function testList(): void
     {
-        $this->client->loginUser($this->testUser); // simulate the test user being logged in
+        $this->client->loginUser($this->testUser); // Simulate the test user being logged in.
 
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_list'));
         $this->assertResponseIsSuccessful();
@@ -41,9 +50,14 @@ class UserControllerTest extends WebTestCase
         $this->assertAnySelectorTextContains('th', "Adresse d'utilisateur");
     }
 
+    /**
+     * User create test
+     *
+     * @return void
+     */
     public function testCreate(): void
     {
-        $this->client->loginUser($this->testUser); // simulate the test user being logged in
+        $this->client->loginUser($this->testUser); // Simulate the test user being logged in.
 
         $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_create'));
 
@@ -60,6 +74,11 @@ class UserControllerTest extends WebTestCase
         $this->assertSelectorTextContains('div.alert.alert-success', "Superbe ! L'utilisateur a bien été ajouté");
     }
 
+    /**
+     * User edit test
+     *
+     * @return void
+     */
     public function testEdit(): void
     {
         $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_edit', ['id' => $this->testUser->getId()]));
@@ -76,7 +95,7 @@ class UserControllerTest extends WebTestCase
         $this->assertSelectorTextContains('div.alert.alert-success', "Superbe ! L'utilisateur a bien été modifié");
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
-        $editedUser = $this->userRepository->findOneByEmail('vision@example.com'); // retrieve the test user
+        $editedUser = $this->userRepository->findOneByEmail('vision@example.com'); // Retrieve the test user.
         $this->assertSame('vision', $editedUser->getUsername());
         $this->assertSame('vision@example.com', $editedUser->getEmail());
     }

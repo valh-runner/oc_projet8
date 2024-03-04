@@ -12,8 +12,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SecurityControllerTest extends WebTestCase
 {
+
     private ?KernelBrowser $client = null;
+
     private ?UrlGeneratorInterface  $urlGenerator = null;
+
     private ?EntityRepository $userRepository = null;
 
     public function setUp(): void
@@ -31,6 +34,11 @@ class SecurityControllerTest extends WebTestCase
         unset($this->userRepository);
     }
 
+    /**
+     * Login test
+     *
+     * @return void
+     */
     public function testLogin(): void
     {
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('login'));
@@ -38,16 +46,26 @@ class SecurityControllerTest extends WebTestCase
         $this->assertSelectorTextContains('button', 'Se connecter');
     }
 
+    /**
+     * Login check test
+     *
+     * @return void
+     */
     public function testLoginCheck(): void
     {
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('login_check'));
         $this->assertResponseStatusCodeSame(Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
+    /**
+     * Logout test
+     *
+     * @return void
+     */
     public function testLogout(): void
     {
-        $testUser = $this->userRepository->findOneByEmail('jarvis@example.com'); // retrieve the test user
-        $this->client->loginUser($testUser); // simulate the test user being logged in
+        $testUser = $this->userRepository->findOneByEmail('jarvis@example.com'); // Retrieve the test user.
+        $this->client->loginUser($testUser); // Simulate the test user being logged in.
 
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('logout'));
         $this->assertSame(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());

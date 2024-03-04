@@ -9,6 +9,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+
+    /**
+     * Homepage
+     *
+     * @param AuthenticationUtils $authenticationUtils Authentication tool object
+     * @return Response
+     */
     #[Route(path: '/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -17,16 +24,26 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
-            'error' => $error,
+            'error'         => $error,
         ]);
     }
 
+    /**
+     * Login check
+     *
+     * @return void
+     */
     #[Route(path: '/login_check', name: 'login_check')]
     public function loginCheck(): void
     {
         // This code is never executed.
     }
 
+    /**
+     * Logout
+     *
+     * @return void
+     */
     #[Route(path: '/logout', name: 'logout')]
     public function logoutCheck(): void
     {
