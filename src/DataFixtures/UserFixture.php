@@ -14,7 +14,7 @@ class UserFixture extends Fixture
 
     /**
      * Constructor
-     * 
+     *
      * @param UserPasswordHasherInterface $userPasswordHasherInterface
      * @return list<class-string<FixtureInterface>>
      */

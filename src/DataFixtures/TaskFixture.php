@@ -39,7 +39,7 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
 
     /**
      * Fixture dependencies getter
-     * 
+     *
      * @return list<class-string<FixtureInterface>>
      */
     public function getDependencies(): array

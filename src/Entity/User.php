@@ -105,7 +105,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Password setter
-     * 
+     *
      * @param string $password
      * @return void
      */
