@@ -81,22 +81,25 @@ class UserControllerTest extends WebTestCase
      */
     public function testEdit(): void
     {
-        $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_edit', ['id' => $this->testUser->getId()]));
+        $this->client->loginUser($this->testUser); // Simulate the test user being logged in.
+
+        $userToEdit = $this->userRepository->findOneBy(['username' => 'barry']); // Retrieve a user.
+
+        $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('user_edit', ['id' => $userToEdit->getId()]));
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
         $form = $crawler->selectButton('Modifier')->form();
-        $form['user[username]'] = 'vision';
-        $form['user[password][first]'] = '3v0lv3D*';
-        $form['user[password][second]'] = '3v0lv3D*';
-        $form['user[email]'] = 'vision@example.com';
+        $form['user[username]'] = 'barryOne';
+        $form['user[password][first]'] = '8T0d0c0';
+        $form['user[password][second]'] = '8T0d0c0';
+        $form['user[email]'] = 'barry_one@example.com';
         $this->client->submit($form);
         $this->client->followRedirect();
 
         $this->assertSelectorTextContains('div.alert.alert-success', "Superbe ! L'utilisateur a bien été modifié");
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
-        $editedUser = $this->userRepository->findOneByEmail('vision@example.com'); // Retrieve the test user.
-        $this->assertSame('vision', $editedUser->getUsername());
-        $this->assertSame('vision@example.com', $editedUser->getEmail());
+        $editedUser = $this->userRepository->findOneByEmail('barry_one@example.com'); // Retrieve the test user.
+        $this->assertSame('barryOne', $editedUser->getUsername());
     }
 }
