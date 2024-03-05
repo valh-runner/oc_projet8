@@ -6,6 +6,7 @@ use App\Entity\Task;
 use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -123,12 +124,20 @@ class TaskControllerTest extends WebTestCase
      */
     public function testDeleteTask(): void
     {
-        $testTask = $this->taskRepository->findAll(['limit' => 1])[0]; // Retrieve a task.
+        $simpleUser = $this->userRepository->findOneByEmail('barry@example.com'); // Retrieve a simple user to log in with.
+        $owner = $this->userRepository->findOneBy(['username' => 'anonym']); // Retrieve an owner.
+        $testTask = $this->taskRepository->findAll(['owner' => $owner, 'limit' => 1])[0]; // Retrieve a task of this owner.
 
-        $this->client->loginUser($this->testUser); // Simulate the test user being logged in.
+        $this->client->loginUser($simpleUser); // Log in as the simple user.
+
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('task_delete', ['id' => $testTask->getId()]));
+        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN); // Not authentificated as the owner.
+
+        $this->client->loginUser($this->testUser); // Log in as the admin user.
+
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('task_delete', ['id' => $testTask->getId()]));
         $this->client->followRedirect();
-        $this->assertResponseIsSuccessful();
+        $this->assertResponseIsSuccessful(); // Admin can delete a task when the owner is the anonym user.
         $this->assertSelectorTextContains('div.alert.alert-success', "Superbe ! La tâche a bien été supprimée");
     }
 }
