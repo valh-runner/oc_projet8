@@ -1,32 +1,26 @@
-
-# Comment contribuer
-
-
-Voir read me pour l'installation
+# How to contribute
 
 
-## Rapport de Problèmes (Issues)
+See read me for installation
 
-Si vous trouvez un problème avec notre projet ou si vous avez une idée d'amélioration, 
-veuillez suivre ces étapes pour signaler un problème :
+## Problem report (Issues)
 
-- Assurez-vous que le problème n'a pas déjà été signalé en recherchant 
-les problèmes existants.
-- Si vous ne trouvez pas de problème similaire, cliquez sur l'onglet "Issues" 
-et sélectionnez "New Issue".
-- Décrivez le problème ou l'amélioration de manière détaillée. Incluez des 
-captures d'écran ou des extraits de code si cela est pertinent.
+If you find any problem with our project or have an idea for improvement,
+Please follow these steps to report a problem:
 
-
-## Proposer des Modifications (Pull Requests)
-Si vous souhaitez proposer des modifications à notre projet, veuillez suivre ces étapes pour soumettre une pull request :
-
-1. Fork notre dépôt GitHub vers votre propre compte.
-2. Clonez votre fork localement sur votre machine.
-3. Créez une nouvelle branche pour travailler sur votre modification (par exemple, feature/nouvelle-fonctionnalite).
-4. Faites les modifications nécessaires dans votre branche.
-5. Assurez-vous que votre code est propre et bien documenté.
+- Make sure the issue hasn't already been reported by searching
+existing problems.
+- If you don't find a similar issue, click on the "Issues" tab
+and select "New Issue".
+- Describe the problem or improvement in detail. Include
+screenshots or code snippets if relevant.
 
 
+## Propose changes (Pull Requests)
+If you would like to propose changes to our project, please follow these steps to submit a pull request:
 
-
+1. Fork our GitHub repository to your own account.
+2. Clone your fork locally on your machine.
+3. Create a new branch to work on your change (for example, feature/new-feature).
+4. Make the necessary changes in your branch.
+5. Make sure your code is clean and well documented.
