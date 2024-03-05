@@ -3,11 +3,11 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/469b12a1b5d6467ea88f9dcd9129f428)](https://app.codacy.com/gh/valh-runner/oc_projet8/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 
-Improvement of an existing Todo List application named Todo & Co.
-This initially involves migrating the application to an actively supported version of the Symfony framework.
-Then proceed to correct some identified anomalies.
-Finally, it is expected to add new features.
-These new features consist of the implementation of unit and functional tests
+Improvement of an existing Todo List application named Todo & Co.\
+This initially involves migrating the application to an actively supported version of the Symfony framework.\
+Then proceed to correct some identified anomalies.\
+Finally, it is expected to add new features.\
+These new features consist of the implementation of unit and functional tests\
 and in setting up access authorization to certain parts of the application and certain actions depending on the user's role.
 
 ### Environment used at the current state
