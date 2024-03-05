@@ -2,6 +2,7 @@
 
 namespace App\Tests\Entity;
 
+use App\Entity\Task;
 use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 
@@ -57,5 +58,47 @@ class UserTest extends TestCase
     {
         $user = new User();
         self::assertSame(['ROLE_USER'], $user->getRoles());
+    }
+
+    public function testRolesAssigned()
+    {
+        $user = new User();
+        $user->setRoles(['ROLE_ADMIN']);
+        self::assertSame(['ROLE_ADMIN', 'ROLE_USER'], $user->getRoles());
+    }
+
+    public function testTaskAssigned()
+    {
+        $user = new User();
+
+        $task = new Task();
+        $task->setTitle('A title');
+        $task->setContent('A content');
+
+        $user->addTask($task);
+
+        $tasks = $user->getTasks();
+        self::assertSame(1, count($tasks));
+        self::assertSame('A title', $tasks[0]->getTitle());
+        self::assertSame('A content', $tasks[0]->getContent());
+    }
+
+    public function testTaskRemoved()
+    {
+        $user = new User();
+
+        $task = new Task();
+        $task->setTitle('A title');
+        $task->setContent('A content');
+
+        $user->addTask($task);
+
+        $tasks = $user->getTasks();
+        self::assertSame(1, count($tasks));
+
+        $user->removeTask($task);
+
+        $tasks = $user->getTasks();
+        self::assertSame(0, count($tasks));
     }
 }
