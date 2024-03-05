@@ -97,14 +97,14 @@ This by configuring a virtualhost in which to place the project.
 
 ## Use the application
 
-You can log in with as a regular user or as an admin.
+You can log in with as a regular user or as an admin.\
 Initial accounts are created by fixtures.\
 Users accounts credentials are visible in fixtures files.
 
 In addition to be able to do regular actions,\
-Admin users can manage regular users\
-and modify and delete their tasks but only if owned by the anonym user.
-It represent the special account who become owner of all ancient tasks.
+Admin users can manage regular users 
+and modify and delete their tasks but only if owned by the anonym user.\
+It represent the special account who become owner of all ancient tasks.\
 Ancient tasks existing before tasks become binded to a user who own it.
 
 ## Troubleshooting
