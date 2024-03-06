@@ -1,0 +1,11 @@
+{# templates/bundles/TwigBundle/Exception/error.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Page not answered - error</h1>
+
+	<p>
+		The requested page couldn't be answered. Checkout for the path of you requested.
+		<a href="{{ path('homepage') }}">return to the homepage</a>.
+	</p>
+{% endblock %}
