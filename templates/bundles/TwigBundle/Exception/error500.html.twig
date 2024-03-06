@@ -1,0 +1,11 @@
+{# templates/bundles/TwigBundle/Exception/error500.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Page not rendered - error 500</h1>
+
+	<p>
+		The requested page couldn't be rendered. Checkout for the path of your wanted page or maybe a temporary problem at our side.
+		<a href="{{ path('homepage') }}">return to the homepage</a>.
+	</p>
+{% endblock %}
