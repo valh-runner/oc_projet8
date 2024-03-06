@@ -24,3 +24,10 @@ If you would like to propose changes to our project, please follow these steps t
 3. Create a new branch to work on your change (for example, feature/new-feature).
 4. Make the necessary changes in your branch.
 5. Make sure your code is clean and well documented.
+6. Please review your code with a code quality analyzer like Codacy or CodeClimate before any pull request.
+
+## Code style
+Make sure that your code avoid:
+- lines of code that exceed 120 chars long.
+- variable names exceeding 20 chars long.
+- three consecutive blank lines.
